@@ -8,11 +8,15 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>reap-base</artifactId>
-	 
+	<properties>
+	  <reap-cloud-runtime.version>0.0.1-SNAPSHOT</reap-cloud-runtime.version>
+	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.reap</groupId>
+			<artifactId>reap-cloud-runtime</artifactId>
+			<version>${reap-cloud-runtime.version}</version>
+			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
