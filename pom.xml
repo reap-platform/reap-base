@@ -36,11 +36,12 @@
 					<noJekyll>true</noJekyll>
 					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
 					<branch>refs/heads/master</branch>
+					<merge>true</merge>
 					<includes>
 						<include>**/*</include>
 					</includes>
-					<repositoryName>maven-repository</repositoryName>
-					<repositoryOwner>7upcat</repositoryOwner>
+					<repositoryName>reap-maven-repository</repositoryName>
+					<repositoryOwner>reap-platform</repositoryOwner>
 				</configuration>
 				<executions>
 					<execution>
