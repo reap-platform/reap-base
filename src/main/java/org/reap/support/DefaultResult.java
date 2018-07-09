@@ -62,7 +62,21 @@ public class DefaultResult<T> implements Result<T> {
 		return result;
 	}
 
-	private DefaultResult() {
+	protected DefaultResult() {
+		this.status = Result.STATUS_SUCCESS;
+		this.responseCode = ResponseCodes.RESPONSE_CODE_SUCCESS;
+	}
+	
+	protected DefaultResult(T payload) {
+		this.status = Result.STATUS_SUCCESS;
+		this.responseCode = ResponseCodes.RESPONSE_CODE_SUCCESS;
+		this.payload = payload;
+	}
+	
+	protected DefaultResult(String responseCode, String responseMessage) {
+		this.status = Result.STATUS_FAIL;
+		this.responseCode = responseCode;
+		this.responseMessage = responseMessage;
 	}
 
 	private Map<String, Object> headers = new HashMap<>();

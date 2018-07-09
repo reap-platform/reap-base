@@ -86,4 +86,19 @@ public interface Result<T> {
 	 * @return header 的值
 	 */
 	Object getHeader(String key);
+
+	static Result<?> newResult() {
+		return  new DefaultResult<>();
+	}
+
+	static <T> Result<T> newResult(T payload) {
+		DefaultResult<T> result = new DefaultResult<>(payload);
+		return result;
+	}
+
+	public static <T> Result<T> newFailResult(String responseCode, String responseMessage) {
+		DefaultResult<T> result = new DefaultResult<>(responseCode, responseMessage);
+		return result;
+	}
+
 }
