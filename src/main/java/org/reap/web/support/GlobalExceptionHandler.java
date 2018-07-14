@@ -35,6 +35,7 @@ import org.reap.support.DefaultResult;
 import org.reap.support.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -65,9 +66,14 @@ public class GlobalExceptionHandler {
 		}
 		else {
 			CoreException core = (CoreException) ex;
-			String responseMessage = core.getMessage() == null
-					? messageSource.getMessage(core.getCode(), core.getArgs(), Locale.getDefault())
-					: core.getMessage();
+			String responseMessage = core.getMessage();
+			if(null == responseMessage) {
+				try {
+				responseMessage = messageSource.getMessage(core.getCode(), core.getArgs(), Locale.getDefault());
+				}catch(NoSuchMessageException e) {
+					responseMessage = "系统错误，请联系管理员";
+				}
+			}
 			// 对于正常的业务异常 HttpStatus 返回 OK 而非服务端错误
 			return new ResponseEntity<>(DefaultResult.newFailResult(core.getCode(), responseMessage), HttpStatus.OK);
 		}
